@@ -36,7 +36,7 @@ namespace ServiceLayer.Services
             return movies;
         }
 
-        public IEnumerable<Movies> LeastScore()
+        public IEnumerable<Movies> LeastScores()
         {
             IEnumerable<Movies> leastScoreMovies = _context.Movies.OrderBy(e => e.IMDBscore);
             return leastScoreMovies;

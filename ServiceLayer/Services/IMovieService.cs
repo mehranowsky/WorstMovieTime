@@ -6,7 +6,7 @@ namespace ServiceLayer.Services
     {
         IEnumerable<Movies> NewMovies();
         IEnumerable<Movies> PopularMovies();
-        IEnumerable<Movies> LeastScore();
+        IEnumerable<Movies> LeastScores();
         IEnumerable<Movies> GenreBased(int genreId);
         IEnumerable<Movies> CountryBased(int countryId);
         IEnumerable<Movies> ActorMovies(int actorId);

@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using ModelLayer.Models;
+using ModelLayer.Models.ViewModels;
 using ServiceLayer.Services;
 
 namespace WorstMovieTime.Controllers
@@ -13,9 +13,13 @@ namespace WorstMovieTime.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<Movies> newMovies = _movieService.NewMovies();
-            IEnumerable<Movies> popularMovies = _movieService.PopularMovies();
-            return View();
+            var homePageViewModel = new HomePageViewModel
+            {
+                NewMovies = _movieService.NewMovies(),
+                PopularMovies = _movieService.PopularMovies(),
+                LeastScores = _movieService.LeastScores()
+            };
+            return View(homePageViewModel);
         }
         
     }

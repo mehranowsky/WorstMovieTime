@@ -16,6 +16,7 @@ builder.Services.AddAutoMapper(cfg =>
     cfg.AddProfile<AutoMappingProfile>();
 });
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IMovieService, MovieService>();
 
 
 var app = builder.Build();

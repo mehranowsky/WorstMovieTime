@@ -2,6 +2,7 @@
 using ModelLayer.Context;
 using ModelLayer.Models;
 using ModelLayer.Models.ViewModels;
+using ServiceLayer.Utilities;
 
 namespace ServiceLayer.Services
 {
@@ -15,50 +16,46 @@ namespace ServiceLayer.Services
             _context = context;
         }
 
-        public bool Register(RegisterViewModel registerInfo)
+        public OperationResult Register(RegisterViewModel registerInfo)
         {
             try
             {
                 var existingUser = _context.Users.FirstOrDefault(e => e.PhoneNumber == registerInfo.PhoneNumber);
                 if (existingUser != null)
                 {
-                    return false;
+                    return OperationResult.Error("کاربری با این شماره موبایل وجود دارد!");
                 }
 
                 var newUser = _mapper.Map<Users>(registerInfo);
                 newUser.Role = Users.UserRole.User;
                 _context.Users.Add(newUser);
                 _context.SaveChanges();
-                return true;
+                return OperationResult.Success();
             }
             catch (Exception)
             {
-                return false;
+                return OperationResult.Error();
             }
         }
-        public bool Login(LoginViewModel loginInfo)
+        public OperationResult Login(LoginViewModel loginInfo)
         {
             try
             {
-                var user = _context.Users.FirstOrDefault(e => e.PhoneNumber == loginInfo.PhoneNumber);
-                if (user != null)
+                var user = _context.Users.Any(e => e.PhoneNumber == loginInfo.PhoneNumber);
+                if (user)
                 {
-                    if (user.Password == loginInfo.Password)
-                    {
-                        return true;
-                    }
-                    return true;
+                    return OperationResult.Success();
                 }
-                return false;
+                return OperationResult.NotFound("کاربری با این اطلاعات یافت نشد!");
             }
             catch (Exception)
             {
-                return false;
+                return OperationResult.Error();
             }
         }
 
         public string SendOTP()
-        {            
+        {
             string code = new Random().Next(100000, 1000000).ToString();
             return code;
         }
