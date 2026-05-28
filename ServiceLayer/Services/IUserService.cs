@@ -7,6 +7,6 @@ namespace ServiceLayer.Services
     public interface IUserService : IGenericService<Users>
     {
         OperationResult Register(RegisterViewModel registerInfo);
-        OperationResult Login(LoginViewModel loginInfo);
+        OperationResult Login(LoginViewModel loginInfo);        
     }
 }

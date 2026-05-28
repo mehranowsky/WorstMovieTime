@@ -13,5 +13,8 @@ namespace ModelLayer.Models.ViewModels
         [Required(ErrorMessage = "{0} را وارد کنید")]
         [DataType(DataType.Password)]
         public string? Password { get; set; }
+        [Required]
+        [MaxLength(6)]
+        public int OTPCode { get; set; }
     }
 }

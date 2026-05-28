@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ModelLayer.Models.ViewModels;
 using ServiceLayer.Services;
+using ServiceLayer.Utilities;
 
 namespace WorstMovieTime.Controllers
 {
@@ -22,11 +23,9 @@ namespace WorstMovieTime.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool registerSuccess = _userService.Register(registerInfo);
-                if (registerSuccess)
-                {
-                    return RedirectToPage("/");
-                }
+                OperationResult register = _userService.Register(registerInfo);
+                if (register.Status == OperationResult.ResultStatus.Success)
+                    return RedirectToPage("/Home");
             }
             return View(registerInfo);
         }
@@ -41,9 +40,10 @@ namespace WorstMovieTime.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool loginSuccess = _userService.Login(loginInfo);
-                return RedirectToPage("/");
-            }
+                OperationResult login = _userService.Login(loginInfo);
+                if(login.Status == OperationResult.ResultStatus.Success)
+                    return RedirectToPage("/Home");
+            }       
             return View(loginInfo);
         }
     }

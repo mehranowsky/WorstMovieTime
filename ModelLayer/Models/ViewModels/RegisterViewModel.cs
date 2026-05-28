@@ -18,5 +18,8 @@ namespace ModelLayer.Models.ViewModels
         [Length(8, 100, ErrorMessage = "{0} باید بین 8 تا 20 کاراکتر باشد")]
         [DataType(DataType.Password)]
         public string? Password { get; set; }
+        [Required]
+        [MaxLength(6)]
+        public int OTPCode { get; set; }
     }
 }

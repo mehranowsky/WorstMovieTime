@@ -14,15 +14,13 @@ namespace ModelLayer.Models
         [Required]
         [Length(11, 11)]
         [DataType(DataType.PhoneNumber)]
-        public string? PhoneNumber { get; set; }
-        [Required]
-        public bool PhoneNumberConfirmed { get; set; }
+        public string? PhoneNumber { get; set; }                
         [Required]
         [Length(8, 100)]
         public string? Password { get; set; }
         [Required]
         public bool IsVIP { get; set; } = false;
-        public UserRole Role { get; set; }
+        public UserRole Role { get; set; } = UserRole.User;
         [Required]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime? UpdatedAt { get; set; }
