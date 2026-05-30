@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using ModelLayer.Models.ViewModels;
 using ServiceLayer.Services;
 using ServiceLayer.Utilities;
@@ -25,7 +26,12 @@ namespace WorstMovieTime.Controllers
             {
                 OperationResult register = _userService.Register(registerInfo);
                 if (register.Status == OperationResult.ResultStatus.Success)
+                {
+                    var newUser = _userService.GetUserByEmail(registerInfo.Email);
+                    var Principal = CookiePrincipal.AllotCookie(newUser);
+                    HttpContext.SignInAsync(Principal);
                     return Redirect("/");
+                }                    
             }
             return View(registerInfo);
         }
@@ -42,7 +48,12 @@ namespace WorstMovieTime.Controllers
             {
                 OperationResult login = _userService.Login(loginInfo);
                 if(login.Status == OperationResult.ResultStatus.Success)
+                {
+                    var user = _userService.GetUserByEmail(loginInfo.Email);
+                    var principal = CookiePrincipal.AllotCookie(user);
+                    HttpContext.SignInAsync(principal);
                     return Redirect("/");
+                }                    
             }       
             return View(loginInfo);
         }        

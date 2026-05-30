@@ -33,8 +33,7 @@ namespace ServiceLayer.Services
                 Users newUser = _mapper.Map<Users>(registerInfo);
                 newUser.Password = hashedPassword;
                 _context.Users.Add(newUser);
-                _context.SaveChanges();
-                CookiePrincipal.AllotCookie(newUser);
+                _context.SaveChanges();                
                 return OperationResult.Success();
             }
             catch (Exception)
@@ -50,17 +49,20 @@ namespace ServiceLayer.Services
             {
                 string hashedPass = Hasher.hash(loginInfo.Password);
                 var user = _context.Users.FirstOrDefault(e => e.Email == loginInfo.Email && e.Password == hashedPass);
-                if (user != null)
-                {
-                    CookiePrincipal.AllotCookie(user);
-                    return OperationResult.Success();
-                }                    
+                if (user != null)                                    
+                    return OperationResult.Success();               
                 return OperationResult.NotFound("کاربری با این اطلاعات یافت نشد!");
             }
             catch (Exception)
             {
                 return OperationResult.Error();
             }
+        }
+
+        public Users GetUserByEmail(string email)
+        {
+            var user = _context.Users.FirstOrDefault(e=>e.Email == email);
+            return user;
         }
 
         public async Task<OperationResult> SendTokenEmail(string email)

@@ -8,6 +8,7 @@ namespace ServiceLayer.Services
     {
         OperationResult Register(RegisterViewModel registerInfo);
         OperationResult Login(LoginViewModel loginInfo);
+        Users GetUserByEmail(string email);
         Task<OperationResult> SendTokenEmail(string email);
 
         // Verify by phoneNumber
