@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ModelLayer.Models
 {    
-    [Index(nameof(PhoneNumber), IsUnique = true)]
+    [Index(nameof(PhoneNumber), nameof(Email), IsUnique = true)]
     public class Users : BaseEntity
     {
         [Key]

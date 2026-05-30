@@ -1,0 +1,38 @@
+﻿@{
+}
+
+@section Styles {
+    <link href="~/css/login.css" rel="stylesheet" />
+}
+<main class="auth-page">
+
+    <div class="auth-box">
+
+        <h2>ورود به حساب</h2>
+
+        <form>
+
+            <div class="form-group">
+                <label>نام کاربری</label>
+                <input type="text">
+            </div>
+
+            <div class="form-group">
+                <label>رمز عبور</label>
+                <input type="password">
+            </div>
+
+            <button class="auth-btn" type="submit">
+                ورود
+            </button>
+
+        </form>
+
+        <div class="auth-links">
+            حساب ندارید؟
+            <a asp-controller="Auth" asp-action="Register">ثبت نام</a>
+        </div>
+
+    </div>
+
+</main>

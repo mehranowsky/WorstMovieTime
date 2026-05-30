@@ -1,0 +1,187 @@
+﻿@model ModelLayer.Models.Users
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Details";
+}
+
+<div class="container-fluid px-4">
+    <div class="d-flex justify-content-between align-items-center mt-4 mb-3">
+        <h2 class="fw-bold text-primary">
+            <i class="bi bi-info-circle me-2"></i>User Details
+        </h2>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a asp-area="Admin" asp-action="Index">Users</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Details</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-header bg-info text-white rounded-top d-flex justify-content-between align-items-center py-3">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-person-badge me-2"></i>User Information
+                    </h5>
+                    <span class="badge bg-light text-info rounded-pill px-3 py-2">
+                        <i class="bi bi-fingerprint me-1"></i>ID: @Model?.Id
+                    </span>
+                </div>
+                <div class="card-body p-4">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-3 fw-semibold text-muted">
+                            <i class="bi bi-person me-2"></i>@Html.DisplayNameFor(model => model.Name)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.Name)
+                        </dd>
+
+                        <hr class="my-2" />
+
+                        <dt class="col-sm-3 fw-semibold text-muted">
+                            <i class="bi bi-telephone me-2"></i>@Html.DisplayNameFor(model => model.PhoneNumber)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.PhoneNumber)
+                        </dd>
+
+                        <hr class="my-2" />
+
+                        <dt class="col-sm-3 fw-semibold text-muted">
+                            <i class="bi bi-envelope me-2"></i>@Html.DisplayNameFor(model => model.Email)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.Email)
+                        </dd>
+
+                        <hr class="my-2" />
+
+                        <dt class="col-sm-3 fw-semibold text-muted">
+                            <i class="bi bi-envelope-check me-2"></i>@Html.DisplayNameFor(model => model.EmailConfirmation)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @if (Model?.EmailConfirmation == true)
+                            {
+                                <span class="badge bg-success rounded-pill">
+                                    <i class="bi bi-check-circle me-1"></i>Confirmed
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning text-dark rounded-pill">
+                                    <i class="bi bi-exclamation-circle me-1"></i>Pending
+                                </span>
+                            }
+                        </dd>
+
+                        <hr class="my-2" />
+
+                        <dt class="col-sm-3 fw-semibold text-muted">
+                            <i class="bi bi-lock me-2"></i>@Html.DisplayNameFor(model => model.Password)
+                        </dt>
+                        <dd class="col-sm-9">
+                            <span class="text-muted">@Html.DisplayFor(model=>model.Password)</span>
+                        </dd>
+
+                        <hr class="my-2" />
+
+                        <dt class="col-sm-3 fw-semibold text-muted">
+                            <i class="bi bi-star me-2"></i>@Html.DisplayNameFor(model => model.IsVIP)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @if (Model?.IsVIP == true)
+                            {
+                                <span class="badge bg-warning text-dark rounded-pill">
+                                    <i class="bi bi-star-fill me-1"></i>VIP Member
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary rounded-pill">
+                                    <i class="bi bi-person me-1"></i>Regular
+                                </span>
+                            }
+                        </dd>
+
+                        <hr class="my-2" />
+
+                        <dt class="col-sm-3 fw-semibold text-muted">
+                            <i class="bi bi-shield me-2"></i>@Html.DisplayNameFor(model => model.Role)
+                        </dt>
+                        <dd class="col-sm-9">
+                            <span class="badge bg-primary rounded-pill">
+                                <i class="bi bi-person-badge me-1"></i>@Html.DisplayFor(model => model.Role)
+                            </span>
+                        </dd>
+
+                        <hr class="my-2" />
+
+                        <dt class="col-sm-3 fw-semibold text-muted">
+                            <i class="bi bi-calendar-plus me-2"></i>@Html.DisplayNameFor(model => model.CreatedAt)
+                        </dt>
+                        <dd class="col-sm-9">
+                            <i class="bi bi-clock me-1"></i>@Html.DisplayFor(model => model.CreatedAt)
+                        </dd>
+
+                        <hr class="my-2" />
+
+                        <dt class="col-sm-3 fw-semibold text-muted">
+                            <i class="bi bi-calendar-check me-2"></i>@Html.DisplayNameFor(model => model.UpdatedAt)
+                        </dt>
+                        <dd class="col-sm-9">
+                            <i class="bi bi-clock-history me-1"></i>@Html.DisplayFor(model => model.UpdatedAt)
+                        </dd>
+                    </dl>
+                </div>
+                <div class="card-footer bg-light rounded-bottom">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a asp-area="Admin" asp-action="Index" class="btn btn-outline-secondary rounded-pill px-3">
+                            <i class="bi bi-arrow-left me-1"></i>Back to List
+                        </a>
+                        <a asp-area="Admin" asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning rounded-pill px-4">
+                            <i class="bi bi-pencil me-1"></i>Edit
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-header bg-primary text-white rounded-top py-3">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-clock-history me-2"></i>Activity
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <small class="text-muted d-block">Account Created</small>
+                        <strong>@Html.DisplayFor(model => model.CreatedAt)</strong>
+                    </div>
+                    <div class="mb-3">
+                        <small class="text-muted d-block">Last Updated</small>
+                        <strong>@Html.DisplayFor(model => model.UpdatedAt)</strong>
+                    </div>
+                    <div>
+                        <small class="text-muted d-block">Status</small>
+                        @if (Model?.EmailConfirmation == true)
+                        {
+                            <span class="badge bg-success rounded-pill">
+                                <i class="bi bi-check-circle me-1"></i>Verified
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning text-dark rounded-pill">
+                                <i class="bi bi-exclamation-circle me-1"></i>Unverified
+                            </span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

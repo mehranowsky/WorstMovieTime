@@ -10,5 +10,6 @@ namespace ServiceLayer.Services
         IEnumerable<Movies> GenreBased(int genreId);
         IEnumerable<Movies> CountryBased(int countryId);
         IEnumerable<Movies> ActorMovies(int actorId);
+        Movies GetMovieBySlug(string slug);
     }
 }

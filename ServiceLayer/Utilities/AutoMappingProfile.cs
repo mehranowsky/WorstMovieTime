@@ -8,7 +8,7 @@ namespace WorstMovieTime.Utilities
     {
         public AutoMappingProfile() {
             CreateMap<RegisterViewModel, Users>().ReverseMap().IgnoreAllPropertiesWithAnInaccessibleSetter();
-            CreateMap<LoginViewModel, Users>().ReverseMap().IgnoreAllPropertiesWithAnInaccessibleSetter();
+            CreateMap<LoginViewModel, Users>().ReverseMap().IgnoreAllPropertiesWithAnInaccessibleSetter();            
         }
     }
 }

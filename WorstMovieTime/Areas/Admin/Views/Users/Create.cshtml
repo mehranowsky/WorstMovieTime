@@ -1,0 +1,225 @@
+﻿@model ModelLayer.Models.Users
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Create";
+}
+
+<div class="container-fluid px-4">
+    <div class="d-flex justify-content-between align-items-center mt-4 mb-3">
+        <h2 class="fw-bold text-success">
+            <i class="bi bi-person-plus me-2"></i>Create New User
+        </h2>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a asp-action="Index">Users</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Create</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-header bg-success text-white rounded-top py-3">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-person-badge me-2"></i>New User Registration
+                    </h5>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create" class="needs-validation" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded-3" role="alert">
+                            <i class="bi bi-exclamation-triangle me-2"></i>Please correct the following errors:
+                        </div>
+
+                        <div class="row g-3">
+                            <!-- Personal Information Section -->
+                            <div class="col-12">
+                                <h6 class="text-muted mb-3 pb-2 border-bottom">
+                                    <i class="bi bi-person-lines-fill me-2"></i>Personal Information
+                                </h6>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input asp-for="Name" class="form-control rounded-3" placeholder="Full Name" required />
+                                    <label asp-for="Name">
+                                        <i class="bi bi-person me-1"></i>Full Name
+                                    </label>
+                                    <span asp-validation-for="Name" class="text-danger small"></span>
+                                    <div class="invalid-feedback">Please enter the full name.</div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input asp-for="PhoneNumber" class="form-control rounded-3" placeholder="Phone Number" />
+                                    <label asp-for="PhoneNumber">
+                                        <i class="bi bi-telephone me-1"></i>Phone Number
+                                    </label>
+                                    <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
+                                </div>
+                            </div>
+
+                            <!-- Account Information Section -->
+                            <div class="col-12 mt-3">
+                                <h6 class="text-muted mb-3 pb-2 border-bottom">
+                                    <i class="bi bi-shield-lock-fill me-2"></i>Account Information
+                                </h6>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input asp-for="Email" type="email" class="form-control rounded-3" placeholder="Email Address" required />
+                                    <label asp-for="Email">
+                                        <i class="bi bi-envelope me-1"></i>Email Address
+                                    </label>
+                                    <span asp-validation-for="Email" class="text-danger small"></span>
+                                    <div class="invalid-feedback">Please enter a valid email address.</div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input asp-for="Password" type="password" class="form-control rounded-3" placeholder="Password" required />
+                                    <label asp-for="Password">
+                                        <i class="bi bi-lock me-1"></i>Password
+                                    </label>
+                                    <span asp-validation-for="Password" class="text-danger small"></span>
+                                    <div class="invalid-feedback">Please enter a password.</div>
+                                </div>
+                            </div>
+
+                            <!-- Role & Permissions Section -->
+                            <div class="col-12 mt-3">
+                                <h6 class="text-muted mb-3 pb-2 border-bottom">
+                                    <i class="bi bi-gear-fill me-2"></i>Role & Permissions
+                                </h6>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select asp-for="Role" class="form-select rounded-3" required>
+                                        <option value="User">User</option>
+                                        <option value="Admin">Admin</option>
+                                    </select>
+                                    <label asp-for="Role">
+                                        <i class="bi bi-shield me-1"></i>User Role
+                                    </label>
+                                    <span asp-validation-for="Role" class="text-danger small"></span>
+                                    <div class="invalid-feedback">Please select a role.</div>
+                                </div>
+                            </div>
+
+                            <!-- Preferences Section -->
+                            <div class="col-12 mt-3">
+                                <h6 class="text-muted mb-3 pb-2 border-bottom">
+                                    <i class="bi bi-toggles me-2"></i>Preferences
+                                </h6>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="card bg-light border-0 rounded-3">
+                                    <div class="card-body">
+                                        <div class="row">                                            
+                                            <div class="col-md-6">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" asp-for="IsVIP" />
+                                                    <label class="form-check-label" asp-for="IsVIP">
+                                                        <i class="bi bi-star me-1"></i>VIP Member
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Timestamps Section -->
+                            <div class="col-12 mt-3">
+                                <h6 class="text-muted mb-3 pb-2 border-bottom">
+                                    <i class="bi bi-calendar-fill me-2"></i>Timestamps
+                                </h6>
+                            </div>
+
+                        <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
+                            <a asp-action="Index" class="btn btn-outline-secondary rounded-pill px-3">
+                                <i class="bi bi-arrow-left me-1"></i>Back to List
+                            </a>
+                            <div>
+                                <button type="reset" class="btn btn-outline-warning rounded-pill px-3 me-2">
+                                    <i class="bi bi-arrow-counterclockwise me-1"></i>Reset Form
+                                </button>
+                                <button type="submit" class="btn btn-success rounded-pill px-4 shadow-sm">
+                                    <i class="bi bi-check-lg me-1"></i>Create User
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        // Enable Bootstrap form validation
+        (function () {
+            'use strict'
+            var forms = document.querySelectorAll('.needs-validation')
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+
+        // Auto-set timestamps
+        document.addEventListener('DOMContentLoaded', function() {
+            var now = new Date().toISOString().slice(0, 16);
+            var createdAtField = document.querySelector('input[name="CreatedAt"]');
+            var updatedAtField = document.querySelector('input[name="UpdatedAt"]');
+
+            if (createdAtField && !createdAtField.value) {
+                createdAtField.value = now;
+            }
+            if (updatedAtField && !updatedAtField.value) {
+                updatedAtField.value = now;
+            }
+        });
+
+        // Password strength indicator (optional enhancement)
+        document.querySelector('input[name="Password"]').addEventListener('input', function(e) {
+            var password = e.target.value;
+            var strengthBadge = document.getElementById('passwordStrength');
+
+            if (!strengthBadge) {
+                strengthBadge = document.createElement('div');
+                strengthBadge.id = 'passwordStrength';
+                strengthBadge.className = 'mt-2 small';
+                e.target.parentNode.appendChild(strengthBadge);
+            }
+
+            if (password.length === 0) {
+                strengthBadge.innerHTML = '';
+            } else if (password.length < 6) {
+                strengthBadge.innerHTML = '<span class="text-danger"><i class="bi bi-shield-x me-1"></i>Weak password</span>';
+            } else if (password.length < 10) {
+                strengthBadge.innerHTML = '<span class="text-warning"><i class="bi bi-shield-exclamation me-1"></i>Medium password</span>';
+            } else {
+                strengthBadge.innerHTML = '<span class="text-success"><i class="bi bi-shield-check me-1"></i>Strong password</span>';
+            }
+        });
+    </script>
+}

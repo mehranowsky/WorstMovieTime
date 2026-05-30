@@ -53,5 +53,11 @@ namespace ServiceLayer.Services
             IEnumerable<Movies> popularMovies = _context.Movies.OrderByDescending(e => e.Likes);
             return popularMovies;
         }
+
+        public Movies GetMovieBySlug(string slug)
+        {
+            var movie = _context.Movies.FirstOrDefault(e => e.Slug == slug);
+            return movie ?? new Movies();
+        }
     }
 }

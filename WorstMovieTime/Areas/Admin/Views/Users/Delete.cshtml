@@ -1,0 +1,187 @@
+﻿@model ModelLayer.Models.Users
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Delete";
+}
+
+<div class="container-fluid px-4">
+    <div class="d-flex justify-content-between align-items-center mt-4 mb-3">
+        <h2 class="fw-bold text-danger">
+            <i class="bi bi-trash me-2"></i>Delete User
+        </h2>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a asp-action="Index">Users</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Delete</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <!-- Warning Alert -->
+            <div class="alert alert-danger border-0 rounded-3 shadow-sm d-flex align-items-center mb-4" role="alert">
+                <i class="bi bi-exclamation-triangle-fill fs-3 me-3"></i>
+                <div>
+                    <h4 class="alert-heading mb-1">Are you sure you want to delete this user?</h4>
+                    <p class="mb-0">This action cannot be undone. All data associated with this user will be permanently removed.</p>
+                </div>
+            </div>
+
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-header bg-danger text-white rounded-top d-flex justify-content-between align-items-center py-3">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-person-x me-2"></i>User to be Deleted
+                    </h5>
+                    <span class="badge bg-light text-danger rounded-pill px-3 py-2">
+                        <i class="bi bi-fingerprint me-1"></i>ID: @Model?.Id
+                    </span>
+                </div>
+                <div class="card-body p-4">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-3 fw-semibold text-muted">
+                            <i class="bi bi-person me-2"></i>@Html.DisplayNameFor(model => model.Name)
+                        </dt>
+                        <dd class="col-sm-9 fw-bold">
+                            @Html.DisplayFor(model => model.Name)
+                        </dd>
+
+                        <hr class="my-2" />
+
+                        <dt class="col-sm-3 fw-semibold text-muted">
+                            <i class="bi bi-telephone me-2"></i>@Html.DisplayNameFor(model => model.PhoneNumber)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.PhoneNumber)
+                        </dd>
+
+                        <hr class="my-2" />
+
+                        <dt class="col-sm-3 fw-semibold text-muted">
+                            <i class="bi bi-envelope me-2"></i>@Html.DisplayNameFor(model => model.Email)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.Email)
+                        </dd>
+
+                        <hr class="my-2" />
+
+                        <dt class="col-sm-3 fw-semibold text-muted">
+                            <i class="bi bi-envelope-check me-2"></i>@Html.DisplayNameFor(model => model.EmailConfirmation)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @if (Model?.EmailConfirmation == true)
+                            {
+                                <span class="badge bg-success rounded-pill">
+                                    <i class="bi bi-check-circle me-1"></i>Confirmed
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning text-dark rounded-pill">
+                                    <i class="bi bi-exclamation-circle me-1"></i>Pending
+                                </span>
+                            }
+                        </dd>
+
+                        <hr class="my-2" />
+
+                        <dt class="col-sm-3 fw-semibold text-muted">
+                            <i class="bi bi-lock me-2"></i>@Html.DisplayNameFor(model => model.Password)
+                        </dt>
+                        <dd class="col-sm-9">
+                            <span class="text-muted">••••••••</span>
+                        </dd>
+
+                        <hr class="my-2" />
+
+                        <dt class="col-sm-3 fw-semibold text-muted">
+                            <i class="bi bi-star me-2"></i>@Html.DisplayNameFor(model => model.IsVIP)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @if (Model?.IsVIP == true)
+                            {
+                                <span class="badge bg-warning text-dark rounded-pill">
+                                    <i class="bi bi-star-fill me-1"></i>VIP Member
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary rounded-pill">
+                                    <i class="bi bi-person me-1"></i>Regular
+                                </span>
+                            }
+                        </dd>
+
+                        <hr class="my-2" />
+
+                        <dt class="col-sm-3 fw-semibold text-muted">
+                            <i class="bi bi-shield me-2"></i>@Html.DisplayNameFor(model => model.Role)
+                        </dt>
+                        <dd class="col-sm-9">
+                            <span class="badge bg-primary rounded-pill">
+                                <i class="bi bi-person-badge me-1"></i>@Html.DisplayFor(model => model.Role)
+                            </span>
+                        </dd>
+
+                        <hr class="my-2" />
+
+                        <dt class="col-sm-3 fw-semibold text-muted">
+                            <i class="bi bi-calendar-plus me-2"></i>@Html.DisplayNameFor(model => model.CreatedAt)
+                        </dt>
+                        <dd class="col-sm-9">
+                            <i class="bi bi-clock me-1"></i>@Html.DisplayFor(model => model.CreatedAt)
+                        </dd>
+
+                        <hr class="my-2" />
+
+                        <dt class="col-sm-3 fw-semibold text-muted">
+                            <i class="bi bi-calendar-check me-2"></i>@Html.DisplayNameFor(model => model.UpdatedAt)
+                        </dt>
+                        <dd class="col-sm-9">
+                            <i class="bi bi-clock-history me-1"></i>@Html.DisplayFor(model => model.UpdatedAt)
+                        </dd>
+                    </dl>
+                </div>
+                <div class="card-footer bg-light rounded-bottom">
+                    <form asp-area="Admin" asp-controller="Users" asp-action="Delete" class="d-flex justify-content-between align-items-center">
+                        <input type="hidden" asp-for="Id" />
+                        <a asp-action="Index" class="btn btn-outline-secondary rounded-pill px-3">
+                            <i class="bi bi-arrow-left me-1"></i>Back to List
+                        </a>
+                        <button type="submit" class="btn btn-danger rounded-pill px-4 shadow-sm">
+                            <i class="bi bi-trash me-1"></i>Delete Permanently
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Additional Warning Card -->
+            <div class="card border-danger border-2 rounded-3 mt-4 bg-danger bg-opacity-10">
+                <div class="card-body">
+                    <h6 class="text-danger mb-2">
+                        <i class="bi bi-exclamation-diamond me-2"></i>What will be deleted:
+                    </h6>
+                    <ul class="text-danger mb-0 small">
+                        <li>User profile information</li>
+                        <li>Associated records and references</li>
+                        <li>Login credentials and access rights</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Additional client-side confirmation
+        document.querySelector('form').addEventListener('submit', function(e) {
+            if (!confirm('⚠️ Final Warning: This action cannot be undone!\n\nAre you 100% sure you want to delete this user?')) {
+                e.preventDefault();
+            }
+        });
+    </script>
+}

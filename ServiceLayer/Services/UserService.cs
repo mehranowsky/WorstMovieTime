@@ -4,7 +4,6 @@ using ModelLayer.Context;
 using ModelLayer.Models;
 using ModelLayer.Models.ViewModels;
 using ServiceLayer.Utilities;
-using static System.Net.WebRequestMethods;
 
 namespace ServiceLayer.Services
 {
@@ -35,6 +34,7 @@ namespace ServiceLayer.Services
                 newUser.Password = hashedPassword;
                 _context.Users.Add(newUser);
                 _context.SaveChanges();
+                CookiePrincipal.AllotCookie(newUser);
                 return OperationResult.Success();
             }
             catch (Exception)
@@ -49,9 +49,12 @@ namespace ServiceLayer.Services
             try
             {
                 string hashedPass = Hasher.hash(loginInfo.Password);
-                bool user = _context.Users.Any(e => e.Email == loginInfo.Email && e.Password == hashedPass);
-                if (user)
+                var user = _context.Users.FirstOrDefault(e => e.Email == loginInfo.Email && e.Password == hashedPass);
+                if (user != null)
+                {
+                    CookiePrincipal.AllotCookie(user);
                     return OperationResult.Success();
+                }                    
                 return OperationResult.NotFound("کاربری با این اطلاعات یافت نشد!");
             }
             catch (Exception)

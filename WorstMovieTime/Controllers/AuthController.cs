@@ -2,14 +2,13 @@
 using ModelLayer.Models.ViewModels;
 using ServiceLayer.Services;
 using ServiceLayer.Utilities;
-using System.Threading.Tasks;
 
 namespace WorstMovieTime.Controllers
 {
-    public class AuthenticationController : Controller
+    public class AuthController : Controller
     {
         private readonly IUserService _userService;
-        public AuthenticationController(IUserService userService)
+        public AuthController(IUserService userService)
         {
             _userService = userService;
         }

@@ -1,0 +1,50 @@
+﻿@{
+
+}
+
+@section Styles{
+    <link href="~/css/register.css" rel="stylesheet" />
+}
+
+<main class="auth-page">
+
+    <div class="auth-box">
+
+        <h2>ثبت نام</h2>
+
+        <form asp-controller="Auth" asp-action="Register" method="post">
+
+            <div class="form-group">
+                <label>نام کاربری</label>
+                <input type="text" name="Name">
+            </div>
+
+            <div class="form-group">
+                <label>ایمیل</label>
+                <input type="email" name="Email">
+            </div>
+
+            <div class="form-group">
+                <label>رمز عبور</label>
+                <input type="password" name="Password">
+            </div>
+
+            <div class="form-group">
+                <label>تکرار رمز عبور</label>
+                <input type="password" name="ConfirmPassword">
+            </div>
+
+            <button class="auth-btn" type="submit">
+                ایجاد حساب
+            </button>
+
+        </form>
+
+        <div class="auth-links">
+            قبلاً ثبت نام کرده‌اید؟
+            <a asp-controller="Auth" asp-action="Login">ورود</a>
+        </div>
+
+    </div>
+
+</main>
