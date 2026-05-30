@@ -6,7 +6,9 @@ namespace ServiceLayer.Services
 {
     public interface IUserService : IGenericService<Users>
     {
-        OperationResult Register(RegisterViewModel registerInfo);
-        OperationResult Login(LoginViewModel loginInfo);        
+        Task<OperationResult> Register(RegisterViewModel registerInfo);
+        Task<OperationResult> Login(LoginViewModel loginInfo);
+        OperationResult Verify(VerifyViewModel model);
+        Task<string> SendOTP(string phoneNumber);
     }
 }

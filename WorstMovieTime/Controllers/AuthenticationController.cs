@@ -2,6 +2,7 @@
 using ModelLayer.Models.ViewModels;
 using ServiceLayer.Services;
 using ServiceLayer.Utilities;
+using System.Threading.Tasks;
 
 namespace WorstMovieTime.Controllers
 {
@@ -19,13 +20,13 @@ namespace WorstMovieTime.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Register([Bind("Name,PhoneNumber,Password")]RegisterViewModel registerInfo)
+        public async Task<IActionResult> Register([Bind("Name,PhoneNumber,Password")]RegisterViewModel registerInfo)
         {
             if (ModelState.IsValid)
             {
-                OperationResult register = _userService.Register(registerInfo);
+                OperationResult register = await _userService.Register(registerInfo);
                 if (register.Status == OperationResult.ResultStatus.Success)
-                    return RedirectToPage("/Home");
+                    return Redirect("/Authentication/Verify");
             }
             return View(registerInfo);
         }
@@ -36,15 +37,33 @@ namespace WorstMovieTime.Controllers
         }
         [HttpPost]        
         [ValidateAntiForgeryToken]
-        public IActionResult Login([Bind("PhoneNumber,Password")]LoginViewModel loginInfo)
+        public async Task<IActionResult> Login([Bind("PhoneNumber,Password")]LoginViewModel loginInfo)
         {
             if (ModelState.IsValid)
             {
-                OperationResult login = _userService.Login(loginInfo);
+                OperationResult login = await _userService.Login(loginInfo);
                 if(login.Status == OperationResult.ResultStatus.Success)
                     return RedirectToPage("/Home");
             }       
             return View(loginInfo);
+        }
+        [HttpGet]
+        public IActionResult Verify(string phoneNumber)
+        {
+            var model = new VerifyViewModel
+            {
+                PhoneNumber = phoneNumber
+            };
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Verify(VerifyViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                _userService.Verify(model);
+            }
+                return View();
         }
     }
 }
