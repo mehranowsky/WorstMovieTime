@@ -12,8 +12,8 @@ using ModelLayer.Context;
 namespace ModelLayer.Migrations
 {
     [DbContext(typeof(WorstMoviesDbContext))]
-    [Migration("20260530001909_UserTable_Updated")]
-    partial class UserTable_Updated
+    [Migration("20260530112408_FinalMigration")]
+    partial class FinalMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -306,6 +306,14 @@ namespace ModelLayer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
+
+                    b.Property<bool>("EmailConfirmation")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsVIP")
                         .HasColumnType("bit");
 
@@ -318,7 +326,6 @@ namespace ModelLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Role")
@@ -330,7 +337,8 @@ namespace ModelLayer.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("PhoneNumber")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[PhoneNumber] IS NOT NULL");
 
                     b.ToTable("Users");
                 });

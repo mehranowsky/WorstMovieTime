@@ -20,13 +20,13 @@ namespace WorstMovieTime.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register([Bind("Name,PhoneNumber,Password")]RegisterViewModel registerInfo)
+        public IActionResult Register([Bind("Name,Email,Password,ConfirmPassword")]RegisterViewModel registerInfo)
         {
             if (ModelState.IsValid)
             {
-                OperationResult register = await _userService.Register(registerInfo);
+                OperationResult register = _userService.Register(registerInfo);
                 if (register.Status == OperationResult.ResultStatus.Success)
-                    return Redirect("/Authentication/Verify");
+                    return Redirect("/");
             }
             return View(registerInfo);
         }
@@ -37,33 +37,15 @@ namespace WorstMovieTime.Controllers
         }
         [HttpPost]        
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login([Bind("PhoneNumber,Password")]LoginViewModel loginInfo)
+        public IActionResult Login([Bind("Email,Password")]LoginViewModel loginInfo)
         {
             if (ModelState.IsValid)
             {
-                OperationResult login = await _userService.Login(loginInfo);
+                OperationResult login = _userService.Login(loginInfo);
                 if(login.Status == OperationResult.ResultStatus.Success)
-                    return RedirectToPage("/Home");
+                    return Redirect("/");
             }       
             return View(loginInfo);
-        }
-        [HttpGet]
-        public IActionResult Verify(string phoneNumber)
-        {
-            var model = new VerifyViewModel
-            {
-                PhoneNumber = phoneNumber
-            };
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Verify(VerifyViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                _userService.Verify(model);
-            }
-                return View();
-        }
+        }        
     }
 }
